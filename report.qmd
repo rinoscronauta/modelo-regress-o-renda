@@ -1,0 +1,32 @@
+---
+title: "Modelo Preditivo de Renda"
+subtitle: "Dados PNAD"
+lang: "pt"
+author: ""
+date: "`r Sys.Date()`"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc-title: "Sumário"
+    toc_hide: false
+    grid:
+      sidebar-width: 250px
+      body-width: 900px
+      margin-width: 250px
+      gutter-width: 1.5em
+    theme: cosmo
+    css: custom.css
+    page-layout: full
+---
+
+```{r, include=FALSE}
+source("download_data.R")
+```
+
+::: panel-tabset
+## Dataframe
+
+```{r, echo=TRUE}
+df_variables = dadosPNADc_2024$variables %>% head()
+```
