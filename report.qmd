@@ -21,12 +21,21 @@ format:
 ---
 
 ```{r, include=FALSE}
-source("download_data.R")
+source("R/download_data.R")
 ```
 
-::: panel-tabset
+## Pacotes necessários
+
+Para esta análise, os pacotes que utilizamos foram *PNADcIBGE*, *survey* e *dplyr*. Utilizaremos microdados da PNAD Contínua do 1º trimestre de 2024, e selecionamos as variáveis de acordo com a tabela abaixo:
+
+```{r, echo = FALSE}
+dados_variaveis %>% reactable()
+
+``` 
+
 ## Dataframe
 
 ```{r, echo=TRUE}
-df_variables = dadosPNADc_2024$variables %>% head()
+df_variables = dadosPNADc_2024$variables %>% head() %>% as_tibble()
+df_variables
 ```
