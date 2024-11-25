@@ -4,6 +4,7 @@ library(PNADcIBGE)
 library(dplyr)
 library(survey)
 library(reactable)
+library(pander)
 
 # dadosPNADc_2024 <- get_pnadc(year=2024, quarter=1)
 # saveRDS(dadosPNADc_2024, 'dadosPNADc_2024.rds')
@@ -28,3 +29,7 @@ dados_variaveis = tribble(
   'VD4020',	'Rendimento mensal efetivo de todos os trabalhos para pessoas de 14 anos ou mais de idade (apenas para pessoas que receberam em dinheiro, produtos ou mercadorias em qualquer trabalho)',
   'VD4035',	'Horas efetivamente trabalhadas na semana de referência em todos os trabalhos para pessoas de 14 anos ou mais de idade'
 )
+
+variaveis_selecionadas <- c("UF","V2001","V2005","V2007","V2009","V2010","V3007","VD3004","VD4001","VD4002","VD4020","VD4035")
+
+df_variables = dadosPNADc_2024$variables %>% select(any_of(variaveis_selecionadas)) %>% as_tibble()

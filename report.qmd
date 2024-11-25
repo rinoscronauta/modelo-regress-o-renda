@@ -12,7 +12,7 @@ format:
     toc_hide: false
     grid:
       sidebar-width: 250px
-      body-width: 900px
+      body-width: 1200px
       margin-width: 250px
       gutter-width: 1.5em
     theme: cosmo
@@ -26,16 +26,44 @@ source("R/download_data.R")
 
 ## Pacotes necessários
 
-Para esta análise, os pacotes que utilizamos foram *PNADcIBGE*, *survey* e *dplyr*. Utilizaremos microdados da PNAD Contínua do 1º trimestre de 2024, e selecionamos as variáveis de acordo com a tabela abaixo:
+Para esta análise, os pacotes que utilizamos foram *PNADcIBGE*, *survey*, *dplyr*, *pander* e *reactable*. Utilizaremos microdados da PNAD Contínua do 1º trimestre de 2024, e selecionamos as variáveis de acordo com a tabela abaixo:
 
 ```{r, echo = FALSE}
-dados_variaveis %>% reactable()
+dados_variaveis %>% reactable(defaultPageSize = 12)
 
-``` 
+```
 
-## Dataframe
+Para baixar os dados, utilizamos o seguinte:
+
+```{r, eval = FALSE}
+library(PNADcIBGE)
+
+variaveis_selecionadas <- c("UF","V2001","V2005","V2007","V2009","V2010","V3007","VD3004","VD4001","VD4002","VD4020","VD4035")
+
+dadosPNADc_2024 <- get_pnadc(year=2024, quarter=1, vars=variaveis_selecionadas)
+```
+
+## Exploração dos dados
+
+Antes da análise exploratória de dados, faremos a divisão dos nossos dados em conjuntos de treino e de teste.
+
+```{r}
+
+```
+
+Podemos dar uma olhada nas primeiras 10 linhas do nosso DataFrame:
+
+```{r, echo=FALSE}
+df_variables %>% head(n = 10) %>%  reactable(defaultPageSize = 10)
+```
+
+### Resumo estatístico dos dados
 
 ```{r, echo=TRUE}
-df_variables = dadosPNADc_2024$variables %>% head() %>% as_tibble()
-df_variables
+summary(df_variables) %>% pander()
+```
+
+### Correlação entre as variáveis numéricas
+```{r, echo=TRUE}
+cor(df_variables %>% select(V2001, V2009, VD4020, VD4035), use = "complete.obs")
 ```
