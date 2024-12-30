@@ -45,17 +45,20 @@ dadosPNADc_2024 <- get_pnadc(year=2024, quarter=1, vars=variaveis_selecionadas)
 
 ## Exploração dos dados
 
-Antes da análise exploratória de dados, faremos a divisão dos nossos dados em conjuntos de treino e de teste.
+Antes da análise exploratória de dados, vamos dar uma olhada nas primeiras 10 linhas do nosso DataFrame:
+
+```{r, echo=FALSE}
+df_variables %>% head(n = 10) %>%  reactable(defaultPageSize = 10)
+```
+
+Observamos que há algumas linhas em que a coluna , que é nossa variável alvo, possui valores ausentes, então neste caso, vamos descartar essas linhas.
+
+Além disso, faremos a divisão dos nossos dados em conjuntos de treino e de teste.
 
 ```{r}
 
 ```
 
-Podemos dar uma olhada nas primeiras 10 linhas do nosso DataFrame:
-
-```{r, echo=FALSE}
-df_variables %>% head(n = 10) %>%  reactable(defaultPageSize = 10)
-```
 
 ### Resumo estatístico dos dados
 
