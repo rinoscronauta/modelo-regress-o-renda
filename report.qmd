@@ -26,7 +26,7 @@ source("R/download_data.R")
 
 ## Pacotes necessários
 
-Para esta análise, os pacotes que utilizamos foram *PNADcIBGE*, *survey*, *dplyr*, *pander* e *reactable*. Utilizaremos microdados da PNAD Contínua do 1º trimestre de 2024, e selecionamos as variáveis de acordo com a tabela abaixo:
+Para esta análise, os pacotes que utilizamos foram *PNADcIBGE*, *survey*, *tidyverse*, *pander* e *reactable*. Utilizaremos microdados da PNAD Contínua do 1º trimestre de 2024, e selecionamos as variáveis de acordo com a tabela abaixo:
 
 ```{r, echo = FALSE}
 dados_variaveis %>% reactable(defaultPageSize = 12)
@@ -52,6 +52,10 @@ df_variables %>% head(n = 10) %>%  reactable(defaultPageSize = 10)
 ```
 
 Observamos que há algumas linhas em que a coluna , que é nossa variável alvo, possui valores ausentes, então neste caso, vamos descartar essas linhas.
+
+```{r, echo=FALSE}
+df_variables %<>% filter(!is.na(VD4020))
+```
 
 Além disso, faremos a divisão dos nossos dados em conjuntos de treino e de teste.
 
