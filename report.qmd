@@ -16,8 +16,8 @@ format:
       margin-width: 250px
       gutter-width: 1.5em
     theme: cosmo
-    css: custom.css
     page-layout: full
+output-file: "modelo_preditivo_renda.html"
 ---
 
 ```{r, include=FALSE}
@@ -53,8 +53,8 @@ df_variables %>% head(n = 10) %>%  reactable(defaultPageSize = 10)
 
 Observamos que há algumas linhas em que a coluna , que é nossa variável alvo, possui valores ausentes, então neste caso, vamos descartar essas linhas.
 
-```{r, echo=FALSE}
-df_variables %<>% filter(!is.na(VD4020))
+```{r}
+df_variables = df_variables %>% filter(!is.na(VD4020))
 ```
 
 Além disso, faremos a divisão dos nossos dados em conjuntos de treino e de teste.
