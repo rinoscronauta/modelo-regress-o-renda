@@ -12,7 +12,7 @@ format:
     toc_hide: false
     grid:
       sidebar-width: 250px
-      body-width: 1200px
+      body-width: 1300px
       margin-width: 250px
       gutter-width: 1.5em
     theme: cosmo
@@ -24,9 +24,14 @@ output-file: "modelo_preditivo_renda.html"
 source("R/download_data.R")
 ```
 
-## Pacotes necessários
+## Problema
 
-Para esta análise, os pacotes que utilizamos foram *PNADcIBGE*, *survey*, *tidyverse*, *pander* e *reactable*. Utilizaremos microdados da PNAD Contínua do 1º trimestre de 2024, e selecionamos as variáveis de acordo com a tabela abaixo:
+O objetivo deste projeto era elaborar um modelo preditivo da renda de trabalhadores com 14 anos ou mais. Para isso, 
+utilizamos microdados da Pesquisa Nacional por Amostra de Domicílios (PNAD) Contínua do 1º trimestre de 2024.
+
+## Bibliotecas necessárias
+
+As bibliotecas que utilizamos foram *PNADcIBGE*, *survey*, *tidyverse*, *pander* e *reactable*, e selecionamos as variáveis de acordo com a tabela abaixo:
 
 ```{r, echo = FALSE}
 dados_variaveis %>% reactable(defaultPageSize = 12)
@@ -43,7 +48,7 @@ variaveis_selecionadas <- c("UF","V2001","V2005","V2007","V2009","V2010","V3007"
 dadosPNADc_2024 <- get_pnadc(year=2024, quarter=1, vars=variaveis_selecionadas)
 ```
 
-## Exploração dos dados
+## Pré-processamento: visualização e separação dos dados
 
 Antes da análise exploratória de dados, vamos dar uma olhada nas primeiras 10 linhas do nosso DataFrame:
 
@@ -51,18 +56,19 @@ Antes da análise exploratória de dados, vamos dar uma olhada nas primeiras 10 
 df_variables %>% head(n = 10) %>%  reactable(defaultPageSize = 10)
 ```
 
-Observamos que há algumas linhas em que a coluna , que é nossa variável alvo, possui valores ausentes, então neste caso, vamos descartar essas linhas.
+Observamos que há algumas linhas em que a coluna , que é nossa variável alvo, possui valores ausentes, então neste caso, é necessário descartar essas linhas.
 
 ```{r}
 df_variables = df_variables %>% filter(!is.na(VD4020))
 ```
 
-Além disso, faremos a divisão dos nossos dados em conjuntos de treino e de teste.
+Além disso, faremos a divisão dos nossos dados em conjuntos de treino e de teste. 
 
 ```{r}
 
 ```
 
+## Exploração dos dados
 
 ### Resumo estatístico dos dados
 
